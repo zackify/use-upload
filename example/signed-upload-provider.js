@@ -21,10 +21,10 @@ const App = () => {
   */
   return (
     <FileUploadProvider
-      client={{
+      client={signedXhrClient({
+        url: 'http://localhost:3000/uploads',
         modifyRequest,
-        request: signedXhrClient({ url: 'http://localhost:3000/uploads' }),
-      }}
+      })}
     >
       <App />
     </FileUploadProvider>

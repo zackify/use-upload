@@ -2,10 +2,24 @@
   "name": "react-uploader",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npx babel src --out-dir lib",
+    "watch": "npx babel --watch src --out-dir lib",
+    "example-server": "node -r esm ./example/server.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "apollo-server": "^2.5.0",
+    "apollo-server-express": "^2.5.0",
+    "cors": "^2.8.5",
+    "esm": "^3.2.25",
+    "express": "^4.17.1",
+    "graphql": "^14.3.1",
+    "multer": "^1.4.1"
+  }
 }

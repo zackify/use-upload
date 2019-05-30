@@ -13,10 +13,10 @@ const modifyRequest = request => {
 const App = () => {
   return (
     <FileUploadProvider
-      client={{
+      client={xhrClient({
+        url: 'http://localhost:3000/uploads',
         modifyRequest,
-        request: xhrClient({ url: 'http://localhost:3000/uploads' }),
-      }}
+      })}
     >
       <App />
     </FileUploadProvider>

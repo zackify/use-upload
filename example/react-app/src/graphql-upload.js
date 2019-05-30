@@ -14,6 +14,7 @@ const uploadMutation = gql`
 
 const GraphQLUpload = () => {
   let [files, setFiles] = useState();
+
   let { loading, progress, error } = useUpload(files, {
     mutation: uploadMutation,
     variables: { input: { files, name: 'test' } },

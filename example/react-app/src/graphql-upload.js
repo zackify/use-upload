@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useUpload } from 'react-uploader';
+import { useUpload } from 'react-use-upload';
 
 import gql from 'graphql-tag';
 

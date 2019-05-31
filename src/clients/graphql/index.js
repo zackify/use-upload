@@ -1,5 +1,11 @@
 import request from '../xhr/request';
-import createFileMap from './create-file-map';
+import { extractFiles } from 'extract-files';
+
+/* 
+  Extract files is the official package used by the developer who helped
+  create the graphql upload spec in apollo client / server
+  code here is similar: https://github.com/jaydenseric/graphql-react/blob/1b1234de5de46b7a0029903a1446dcc061f37d09/src/universal/graphqlFetchOptions.mjs
+*/
 
 export const createGraphQLClient = ({ baseUrl, modifyRequest }) => ({
   onProgress,
@@ -7,19 +13,25 @@ export const createGraphQLClient = ({ baseUrl, modifyRequest }) => ({
 }) => {
   let modifiedOptions = modifyRequest(options);
 
+  const { clone, files } = extractFiles({
+    query: options.mutation.loc.source.body,
+    variables: options.variables,
+  });
+
   var body = new FormData();
-  body.append(
-    'operations',
-    JSON.stringify({
-      query: options.mutation.loc.source.body,
-      variables: options.variables,
-    }),
-  );
+  body.append('operations', JSON.stringify(clone));
 
-  let { files, filesMap } = createFileMap(options.variables);
+  const map = {};
+  let i = 0;
+  files.forEach(paths => {
+    map[++i] = paths;
+  });
+  body.append('map', JSON.stringify(map));
 
-  body.append('map', JSON.stringify(filesMap));
-  files.forEach((file, index) => body.append(index, file));
+  i = 0;
+  files.forEach((paths, file) => {
+    body.append(`${++i}`, file, file.name);
+  });
 
   return request({
     body,

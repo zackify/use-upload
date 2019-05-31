@@ -9,8 +9,8 @@ app.use(cors());
 
 app.get('/upload', (req, res) => res.send('working'));
 
-app.post('/upload', upload.array('test'), function(req, res, next) {
-  console.log(req.files);
+app.post('/upload', upload.any(), function(req, res, next) {
+  console.log(req.files, req.body);
   res.send({ done: true });
 });
 
@@ -35,7 +35,7 @@ type Mutation {
 const resolvers = {
   Mutation: {
     uploadFile: (_, { input }) => {
-      console.log(input.files[0]);
+      console.log(input.files);
       return { name: input.name, randomField: 'test' };
     },
   },

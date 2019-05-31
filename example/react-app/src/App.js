@@ -3,7 +3,7 @@ import {
   UploadProvider,
   createXhrClient,
   createGraphQLClient,
-} from 'react-uploader';
+} from 'react-use-upload';
 
 import NormalUpload from './normal-upload';
 import GraphQLUpload from './graphql-upload';

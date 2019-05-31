@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { useUpload } from 'react-uploader';
+import { useUpload } from 'react-use-upload';
 
 const NormalUpload = () => {
   let [files, setFiles] = useState();
   let { loading, progress, error } = useUpload(files, {
     path: '/upload',
     name: 'test',
+    fields: { extraData: 'hello!' },
   });
 
   return (

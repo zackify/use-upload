@@ -8,6 +8,10 @@ const app = express();
 app.use(cors());
 
 app.get('/upload', (req, res) => res.send('working'));
+// mimic generating a signed url for google cloud
+app.get('/get-url', (req, res) =>
+  res.send({ url: 'http://localhost:3000/upload' }),
+);
 
 app.post('/upload', upload.any(), function(req, res, next) {
   console.log(req.files, req.body);

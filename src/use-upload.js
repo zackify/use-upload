@@ -13,6 +13,7 @@ const handleUpload = async ({ files, client, options, setState }) => {
   setState({
     loading: false,
     response,
+    done: response.done,
     error: response.error ? response.response : false,
   });
 };
@@ -23,6 +24,7 @@ export const useUpload = (files, options) => {
 
   useEffect(() => {
     if (!files) return;
+    setState({});
     handleUpload({
       files,
       client,

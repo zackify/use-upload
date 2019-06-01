@@ -5,6 +5,7 @@ import {
   createGraphQLClient,
 } from 'react-use-upload';
 
+import SignedUpload from './signed-upload';
 import NormalUpload from './normal-upload';
 import GraphQLUpload from './graphql-upload';
 
@@ -38,6 +39,7 @@ export default () => {
       </UploadProvider>
       <UploadProvider client={xhrClient}>
         <NormalUpload />
+        <SignedUpload />
       </UploadProvider>
     </React.Fragment>
   );

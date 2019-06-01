@@ -26,6 +26,7 @@ export default ({ xhr, onProgress, resolve }) => {
       response,
       error: xhr.status < 200 || xhr.status >= 300,
       status: xhr.status,
+      done: true,
       headers,
     });
   });

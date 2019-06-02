@@ -1,35 +1,37 @@
-import { useState, useEffect, useContext } from 'react';
+import { useReducer, useEffect, useContext } from 'react';
 import { UploadContext } from './provider';
+import {
+  reducer,
+  START_UPLOADING,
+  SET_UPLOAD_PROGRESS,
+  FINISH_UPLOADING,
+} from './upload-reducer';
 
-const handleUpload = async ({ files, client, options, setState }) => {
-  setState({ loading: true });
+const handleUpload = async ({ files, client, options, dispatch }) => {
+  dispatch({ type: START_UPLOADING });
 
   let response = await client({
     files,
     ...options,
-    onProgress: progress => setState({ progress }),
+    onProgress: progress =>
+      dispatch({ type: SET_UPLOAD_PROGRESS, payload: progress }),
   });
 
-  setState({
-    loading: false,
-    response,
-    done: response.done,
-    error: response.error ? response.response : false,
-  });
+  dispatch({ type: FINISH_UPLOADING, payload: response });
 };
 
 export const useUpload = (files, options) => {
-  let [state, setState] = useState({});
+  const [state, dispatch] = useReducer(reducer, {});
+
   let client = useContext(UploadContext);
 
   useEffect(() => {
     if (!files) return;
-    setState({});
     handleUpload({
       files,
       client,
       options,
-      setState: newState => setState(state => ({ ...state, ...newState })),
+      dispatch,
     });
   }, [files]);
 

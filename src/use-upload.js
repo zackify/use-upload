@@ -13,11 +13,11 @@ const handleUpload = async ({ files, client, options, dispatch }) => {
   let response = await client({
     files,
     ...options,
+    dispatch,
     onProgress: progress =>
       dispatch({ type: SET_UPLOAD_PROGRESS, payload: progress }),
   });
-
-  dispatch({ type: FINISH_UPLOADING, payload: response });
+  if (response) dispatch({ type: FINISH_UPLOADING, payload: response });
 };
 
 export const useUpload = (files, options) => {

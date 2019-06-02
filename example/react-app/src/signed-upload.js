@@ -8,7 +8,7 @@ const getUrl = async files => {
     'the uploader waits for the promise to resolve and uses this url to upload',
     files,
   );
-  await new Promise(resolve => setTimeout(resolve, 3000));
+  await new Promise(resolve => setTimeout(resolve, 1000));
   return url;
 };
 
@@ -17,6 +17,7 @@ const NormalUpload = () => {
 
   let { loading, progress, error, done } = useUpload(files, {
     getUrl,
+    name: 'test',
   });
 
   useEffect(() => {

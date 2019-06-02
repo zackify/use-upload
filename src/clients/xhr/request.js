@@ -1,6 +1,6 @@
 import listeners from './listeners';
 
-export default ({ request, files, onProgress, body }) =>
+export default ({ request, onProgress, body }) =>
   new Promise(resolve => {
     const xhr = new XMLHttpRequest();
 
@@ -17,7 +17,7 @@ export default ({ request, files, onProgress, body }) =>
     if (body) return xhr.send(body);
 
     //send just the file if no fields or filename is set
-    if (!request.name && !request.fields) return xhr.send(files[0]);
+    if (!request.name && !request.fields) return xhr.send(request.files);
 
     var formData = new FormData();
 
@@ -28,7 +28,7 @@ export default ({ request, files, onProgress, body }) =>
       );
     }
 
-    Array.from(files).forEach(file =>
+    Array.from(request.files).forEach(file =>
       formData.append(request.name || 'file', file),
     );
 

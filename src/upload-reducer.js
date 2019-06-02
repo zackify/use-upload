@@ -1,3 +1,4 @@
+export const SET_ERROR = 'SET_ERROR';
 export const START_UPLOADING = 'START_LOADING';
 export const SET_UPLOAD_PROGRESS = 'SET_UPLOAD_PROGRESS';
 export const FINISH_UPLOADING = 'FINISH_UPLOADING';
@@ -9,6 +10,8 @@ export function reducer(state, action) {
       return { loading: true };
     case SET_UPLOAD_PROGRESS:
       return { ...state, progress: action.payload };
+    case SET_ERROR:
+      return { loading: false, error: action.payload, done: true };
     case FINISH_UPLOADING:
       return {
         done: true,

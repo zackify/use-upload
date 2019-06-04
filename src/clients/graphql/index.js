@@ -11,7 +11,7 @@ export const createGraphQLClient = ({ baseUrl, modifyRequest }) => ({
   onProgress,
   options,
 }) => {
-  let modifiedOptions = modifyRequest(options);
+  let modifiedOptions = modifyRequest ? modifyRequest(options) : options;
 
   const { clone, files } = extractFiles({
     query: options.mutation.loc.source.body,

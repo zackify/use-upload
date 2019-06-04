@@ -9,7 +9,7 @@ import { extractFiles } from 'extract-files';
 
 export const createGraphQLClient = ({ baseUrl, modifyRequest }) => ({
   onProgress,
-  ...options
+  options,
 }) => {
   let modifiedOptions = modifyRequest(options);
 

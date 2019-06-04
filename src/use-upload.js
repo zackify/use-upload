@@ -12,7 +12,7 @@ const handleUpload = async ({ files, client, options, dispatch }) => {
 
   let response = await client({
     files,
-    ...options,
+    options,
     dispatch,
     onProgress: progress =>
       dispatch({ type: SET_UPLOAD_PROGRESS, payload: progress }),
@@ -21,9 +21,8 @@ const handleUpload = async ({ files, client, options, dispatch }) => {
 };
 
 export const useUpload = (files, options) => {
-  const [state, dispatch] = useReducer(reducer, {});
-
   let client = useContext(UploadContext);
+  const [state, dispatch] = useReducer(reducer, {});
 
   useEffect(() => {
     if (!files) return;

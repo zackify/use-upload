@@ -5,7 +5,7 @@ export const createXhrClient = ({ baseUrl, modifyRequest }) => async ({
   dispatch,
   onProgress,
   files,
-  ...options
+  options,
 }) => {
   let modifiedOptions = modifyRequest ? modifyRequest(options) : options;
   let url = `${baseUrl}${options.path || ''}`;

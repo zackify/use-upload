@@ -6,9 +6,13 @@ import {
   SET_UPLOAD_PROGRESS,
   FINISH_UPLOADING,
 } from './upload-reducer';
+import { createXhrClient } from './clients/xhr';
 
 const handleUpload = async ({ files, client, options, dispatch }) => {
   dispatch({ type: START_UPLOADING });
+
+  //default to XHR client if there is no provider
+  if (!client) client = createXhrClient({});
 
   let response = await client({
     files,

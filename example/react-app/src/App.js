@@ -41,6 +41,8 @@ export default () => {
         <NormalUpload />
         <SignedUpload />
       </UploadProvider>
+
+      <NormalUpload title="Normal upload, no provider" />
     </React.Fragment>
   );
 };

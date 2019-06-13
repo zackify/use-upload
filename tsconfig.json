@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "baseUrl": "src",
+    "sourceMap": true,
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "downlevelIteration": true,
+    "jsx": "preserve",
+    "declaration": true,
+    "outDir": "lib"
+  },
+  "include": ["src", "index.d.ts"]
+}

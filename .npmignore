@@ -2,3 +2,4 @@ src
 example
 .babelrc
 .gitignore
+tsconfig.json

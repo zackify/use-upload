@@ -10,3 +10,5 @@ export {
   createXhrClient,
   createGraphQLClient,
 };
+
+export type FileOrFileList = FileList | File;

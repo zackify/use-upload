@@ -1,4 +1,5 @@
 # Contents
+
 - [Install](#install)
 - [Setup](#setup)
   - [Basic](#basic-setup)
@@ -10,8 +11,10 @@
   - [Signed Uploads](#signed-uploads)
   - [React Native](#react-native)
 
+## Benefits
+
 This library is the all-in-one react hook for file uploads. It uses [XHR](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) so that file upload progress can be used.
-It supports multiple files at once, and has a built in client for GraphQL uploads. 
+It supports multiple files at once, and has a built in client for GraphQL uploads. It also has TypeScript definitions for easy debugging.
 
 ## Install
 
@@ -33,13 +36,12 @@ import { UploadProvider, createXhrClient } from 'react-use-upload';
 
 <UploadProvider client={createXhrClient({ baseUrl: 'http://localhost:3000' })}>
   <App />
-</UploadProvider>
+</UploadProvider>;
 ```
 
 ### Authentication
 
 ```js
-
 import { UploadProvider, createXhrClient } from 'react-use-upload';
 
 const client = createXhrClient({
@@ -55,12 +57,12 @@ const client = createXhrClient({
 
 <UploadProvider client={client}>
   <App />
-</UploadProvider>
+</UploadProvider>;
 ```
 
 When any upload takes place, it will first call modify request, so that you can pass in additional headers or fields.
 
-### GraphQL 
+### GraphQL
 
 The graphql client uses the same XHR client under the hood, but it must make additional modifications to the way files are sent to the server. Here's how to do it:
 
@@ -80,11 +82,10 @@ const graphQLClient = createGraphQLClient({
 
 <UploadProvider client={client}>
   <App />
-</UploadProvider>
+</UploadProvider>;
 ```
 
-As you can see, from an end-user perspective, all that is needed is `createGraphQLClient` instead of the normal `createXhrClient`. 
-
+As you can see, from an end-user perspective, all that is needed is `createGraphQLClient` instead of the normal `createXhrClient`.
 
 ## Usage
 
@@ -126,7 +127,6 @@ The first argument to the hook is the `FileList` array that is given from an inp
 - `name` the name to use for the files when sending to the server
 - `fields` additional data to send along with the request
 - `headers` extra headers to send
-
 
 ### GraphQL Usage
 
@@ -178,11 +178,12 @@ The options for graphql are as follows:
 ### Signed Uploads
 
 When performing an upload to AWS, Google Cloud, or other hosting provider the process is generally like this:
+
 - Hit your own server, with file metadata, and get back a URL that you should upload to. This would be a direct upload url to a storage bucket
 - Perform the upload to the signed url
 - Hit your own server again if needed, so that you know the file upload is complete (can be done other ways as well)
 
-Here's how this looks: 
+Here's how this looks:
 
 ```js
 import React, { useState, useEffect } from 'react';
@@ -205,9 +206,7 @@ const NormalUpload = () => {
 
   useEffect(() => {
     if (!done) return;
-    console.log(
-      'done uploading, send something to your server if you need to',
-    );
+    console.log('done uploading, send something to your server if you need to');
   }, [done]);
 
   return (
@@ -224,12 +223,10 @@ const NormalUpload = () => {
     </div>
   );
 };
-
 ```
 
 The library adds one small feature to support these usecases. An async `getUrl` option that can be passed into the configuration object.
 This must be a promise, and the upload will wait for it, and use the url it resolves to do the file upload. After it is done, you can make your own `useEffect` if you need to do something afer the upload completes.
-
 
 ### React Native
 

@@ -1,4 +1,23 @@
-export default ({ xhr, onProgress, resolve }) => {
+type XHRListenerProps = {
+  xhr: XMLHttpRequest;
+  onProgress: (progress: number) => void;
+  resolve: (args: XHRResponse) => void;
+};
+
+type Headers = {
+  [key: string]: any;
+};
+
+export type XHRResponse = {
+  response?: string;
+  error?: string | boolean | ProgressEvent;
+  status?: number;
+  done?: boolean;
+  headers?: Headers;
+  aborted?: ProgressEvent;
+} | void;
+
+export default ({ xhr, onProgress, resolve }: XHRListenerProps) => {
   xhr.upload.addEventListener('progress', event => {
     if (!onProgress) return false;
     onProgress(Math.round((event.loaded / event.total) * 100));
@@ -17,7 +36,7 @@ export default ({ xhr, onProgress, resolve }) => {
       .trim()
       .split(/[\r\n]+/)
       .map(line => line.split(': '))
-      .reduce((acc, [header, value]) => {
+      .reduce((acc: Headers, [header, value]) => {
         acc[header] = value;
         return acc;
       }, {});

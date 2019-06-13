@@ -1,11 +1,12 @@
 {
   "name": "react-use-upload",
-  "version": "0.4.0",
+  "version": "0.5.0-test",
   "description": "",
   "main": "lib/index.js",
   "scripts": {
     "test": "tsc",
-    "build": "npx babel src --out-dir lib",
+    "build": "npx babel src --out-dir lib --extensions \".ts,.tsx\" && npm run create-types",
+    "create-types": "tsc --emitDeclarationOnly",
     "watch": "npx babel --watch src --out-dir lib",
     "example-server": "node -r esm ./example/server.js"
   },

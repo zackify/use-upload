@@ -1,6 +1,6 @@
 {
   "name": "react-use-upload",
-  "version": "0.5.0-test",
+  "version": "0.5.0",
   "description": "",
   "main": "lib/index.js",
   "scripts": {

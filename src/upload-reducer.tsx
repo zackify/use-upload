@@ -3,7 +3,7 @@ export const START_UPLOADING = 'START_UPLOADING';
 export const SET_UPLOAD_PROGRESS = 'SET_UPLOAD_PROGRESS';
 export const FINISH_UPLOADING = 'FINISH_UPLOADING';
 
-type State = {
+export type UploadState = {
   loading?: boolean;
   progress?: number;
   error?: string;
@@ -19,7 +19,7 @@ export type Action =
 
 export type dispatchType = (action: Action) => void;
 // The possible state changes that take place during a file upload
-export function reducer(state: State, action: Action) {
+export function reducer(state: UploadState, action: Action) {
   switch (action.type) {
     case START_UPLOADING:
       return { loading: true };

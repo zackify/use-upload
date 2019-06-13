@@ -1,11 +1,12 @@
 import listeners from './listeners';
 import { XHROptions } from './index';
 import { XHRResponse } from './listeners';
+import { FileOrFileList } from '../../';
 
 type Props = {
   options: XHROptions;
   url: string;
-  files: FileList | File;
+  files: FileOrFileList;
   onProgress: (progress: number) => void;
 };
 

@@ -2,15 +2,17 @@ import { useReducer, useEffect, useContext } from 'react';
 import { UploadContext } from './provider';
 import {
   reducer,
+  UploadState,
   START_UPLOADING,
   SET_UPLOAD_PROGRESS,
   FINISH_UPLOADING,
   dispatchType,
 } from './upload-reducer';
 import { XHRClient, XHROptions, createXhrClient } from './clients/xhr';
+import { FileOrFileList } from './';
 
 type HookProps = {
-  files: FileList | File;
+  files: FileOrFileList;
   client: XHRClient | null;
   options: XHROptions;
   dispatch: dispatchType;
@@ -37,7 +39,10 @@ const handleUpload = async ({
   if (response) dispatch({ type: FINISH_UPLOADING, payload: response });
 };
 
-export const useUpload = (files: FileList | File, options: XHROptions) => {
+export const useUpload = (
+  files: FileOrFileList,
+  options: XHROptions,
+): UploadState => {
   let client = useContext<XHRClient | null>(UploadContext);
   const [state, dispatch] = useReducer(reducer, {});
 

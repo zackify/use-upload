@@ -5,10 +5,23 @@ import {
   START_UPLOADING,
   SET_UPLOAD_PROGRESS,
   FINISH_UPLOADING,
+  dispatchType,
 } from './upload-reducer';
-import { createXhrClient } from './clients/xhr';
+import { XHRClient, XHROptions, createXhrClient } from './clients/xhr';
 
-const handleUpload = async ({ files, client, options, dispatch }) => {
+type HookProps = {
+  files: FileList | File;
+  client: XHRClient | null;
+  options: XHROptions;
+  dispatch: dispatchType;
+};
+
+const handleUpload = async ({
+  files,
+  client,
+  options,
+  dispatch,
+}: HookProps) => {
   dispatch({ type: START_UPLOADING });
 
   //default to XHR client if there is no provider
@@ -24,8 +37,8 @@ const handleUpload = async ({ files, client, options, dispatch }) => {
   if (response) dispatch({ type: FINISH_UPLOADING, payload: response });
 };
 
-export const useUpload = (files, options) => {
-  let client = useContext(UploadContext);
+export const useUpload = (files: FileList | File, options: XHROptions) => {
+  let client = useContext<XHRClient | null>(UploadContext);
   const [state, dispatch] = useReducer(reducer, {});
 
   useEffect(() => {

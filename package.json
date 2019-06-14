@@ -1,12 +1,13 @@
 {
   "name": "react-use-upload",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "",
-  "main": "lib/index.js",
+  "main": "cjs/index.js",
+  "module": "lib/index.js",
   "scripts": {
     "test": "tsc",
     "build": "npx babel src --out-dir lib --extensions \".ts,.tsx\" && npx babel --plugins @babel/plugin-transform-modules-commonjs src --out-dir cjs --extensions \".ts,.tsx\" && npm run create-types",
-    "create-types": "tsc --emitDeclarationOnly",
+    "create-types": "tsc --emitDeclarationOnly && tsc --emitDeclarationOnly --outDir cjs",
     "watch": "npx babel --watch src --out-dir lib",
     "example-server": "node -r esm ./example/server.js"
   },

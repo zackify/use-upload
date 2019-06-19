@@ -29,7 +29,7 @@ Here's an example around your root app:
 
 ### Basic Setup
 
-If you are not using GraphQL, do not want to set custom headers for all requests, or set a base api url, you can skip to the [basic setup](#basic-setup). **Adding a top level provider is only required for the features I just mentioned.**
+If you are not using GraphQL, do not want to set custom headers for all requests, or set a base api url, you can skip to the [basic usage](#basic-usage). **Adding a top level provider is only required for the features I just mentioned.**
 
 ```js
 import { UploadProvider, createXhrClient } from 'react-use-upload';

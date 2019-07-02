@@ -9,17 +9,17 @@ import { XHRResponse } from '../xhr/listeners';
 
 type GraphQLSetupOptions = {
   baseUrl: string;
-  modifyRequest?: (request: RequestOptions) => RequestOptions;
+  modifyRequest?: (request: GraphQLOptions) => GraphQLOptions;
 };
-export type GraphQLOptions = {
+export type GraphQLRequestOptions = {
   onProgress: (progress: number) => void;
-  options: RequestOptions;
+  options: GraphQLOptions;
 };
 type Headers = {
   [key: string]: any;
 };
 
-export type RequestOptions = {
+export type GraphQLOptions = {
   mutation: any;
   variables: any;
   path?: string;
@@ -38,7 +38,7 @@ export const createGraphQLClient = ({
 }: GraphQLSetupOptions) => ({
   onProgress,
   options,
-}: GraphQLOptions): Promise<XHRResponse> => {
+}: GraphQLRequestOptions): Promise<XHRResponse> => {
   let modifiedOptions = modifyRequest ? modifyRequest(options) : options;
 
   const { clone, files } = extractFiles({

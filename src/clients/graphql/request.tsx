@@ -1,9 +1,9 @@
 import listeners from '../xhr/listeners';
-import { RequestOptions } from './index';
+import { GraphQLOptions } from './index';
 import { XHRResponse } from '../xhr/listeners';
 
 type Props = {
-  options: RequestOptions;
+  options: GraphQLOptions;
   url: string;
   onProgress: (progress: number) => void;
   body: FormData;

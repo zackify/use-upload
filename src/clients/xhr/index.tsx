@@ -17,13 +17,17 @@ export type XHRSetupOptions = {
   modifyRequest?: (request: XHROptions) => XHROptions;
 };
 
+export type GetUrlResponse =
+  | string
+  | { fields?: Fields; url: string; headers?: Headers };
+
 export type XHROptions = {
   name?: string;
   fields?: Fields;
   headers?: Headers;
   path?: string;
   withCredentials?: boolean;
-  getUrl?: (files: FileOrFileList) => string | Promise<string>;
+  getUrl?: (files: FileOrFileList) => GetUrlResponse | Promise<GetUrlResponse>;
   method?: 'GET' | 'PUT' | 'POST' | 'PATCH' | 'DELETE';
 };
 
@@ -48,9 +52,19 @@ export const createXhrClient = ({
   let url = `${baseUrl}${options.path || ''}`;
 
   //Get the url using a promise, for signed uploads
+  // this has grown out of control... i need to refactor this library since it was my first time really using TS
+  // and i had taken old upload code
   if (modifiedOptions.getUrl) {
     try {
-      url = await modifiedOptions.getUrl(files);
+      let response = await modifiedOptions.getUrl(files);
+      if (typeof response === 'string') url = response;
+      else {
+        url = response.url;
+        if (response.headers)
+          modifiedOptions = { ...modifiedOptions, headers: response.headers };
+        if (response.fields)
+          modifiedOptions = { ...modifiedOptions, fields: response.fields };
+      }
     } catch (error) {
       console.error(error);
       // If there was a problem, set an error

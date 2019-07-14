@@ -1,6 +1,6 @@
 {
   "name": "react-use-upload",
-  "version": "0.5.6",
+  "version": "0.5.9",
   "description": "",
   "main": "cjs/index.js",
   "module": "lib/index.js",

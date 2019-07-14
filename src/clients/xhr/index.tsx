@@ -1,12 +1,12 @@
 import request from './request';
 import { XHRResponse } from './listeners';
 import { dispatchType, SET_ERROR } from '../../upload-reducer';
-import {FileOrFileList} from '../../'
+import { FileOrFileList } from '../../';
 
 export type XHRClientProps = {
   dispatch: dispatchType;
   onProgress: (progress: number) => void;
-  files:FileOrFileList;
+  files: FileOrFileList;
   options: XHROptions;
 };
 
@@ -23,7 +23,7 @@ export type XHROptions = {
   headers?: Headers;
   path?: string;
   withCredentials?: boolean;
-  getUrl?: (files: FileOrFileList) => string;
+  getUrl?: (files: FileOrFileList) => string | Promise<string>;
   method?: 'GET' | 'PUT' | 'POST' | 'PATCH' | 'DELETE';
 };
 

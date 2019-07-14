@@ -9,11 +9,15 @@ import {
   dispatchType,
 } from './upload-reducer';
 import { XHRClient, XHROptions, createXhrClient } from './clients/xhr';
+<<<<<<< HEAD
 import { FileOrFileList } from './';
 import { GraphQLOptions } from 'clients/graphql';
+=======
+import { FileOrFileList } from './index';
+>>>>>>> Fix type
 
 type HookProps = {
-  files: FileOrFileList;
+  files: File | FileList;
   client: XHRClient | null;
   options: XHROptions | GraphQLOptions;
   dispatch: dispatchType;

@@ -1,3 +1,6 @@
+# Todo
+Some of this code was taken from my previous upload library. After adding in TS to this as my first TS project, I realize the code can be much better and a refactor needs to be done
+
 # Contents
 
 - [Install](#install)

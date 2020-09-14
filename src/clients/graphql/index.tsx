@@ -11,10 +11,14 @@ type GraphQLSetupOptions = {
   baseUrl: string;
   modifyRequest?: (request: GraphQLOptions) => GraphQLOptions;
 };
-export type GraphQLRequestOptions = {
+
+export type GraphQLClientProps = {
   onProgress: (progress: number) => void;
-  options: GraphQLOptions;
+  options: any;
 };
+
+export type GraphQLClient = (args: GraphQLClientProps) => Promise<XHRResponse>;
+
 type Headers = {
   [key: string]: any;
 };
@@ -38,7 +42,7 @@ export const createGraphQLClient = ({
 }: GraphQLSetupOptions) => ({
   onProgress,
   options,
-}: GraphQLRequestOptions): Promise<XHRResponse> => {
+}: GraphQLClientProps): Promise<XHRResponse> => {
   let modifiedOptions = modifyRequest ? modifyRequest(options) : options;
 
   const { clone, files } = extractFiles({

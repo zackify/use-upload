@@ -7,7 +7,7 @@ export type XHRClientProps = {
   dispatch: dispatchType;
   onProgress: (progress: number) => void;
   files: FileOrFileList;
-  options: XHROptions;
+  options: any;
 };
 
 export type XHRClient = (args: XHRClientProps) => Promise<XHRResponse>;

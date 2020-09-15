@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { useUpload } from 'react-use-upload';
+import React, { useState } from "react";
+import { useUpload } from "react-use-upload";
 
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
 const uploadMutation = gql`
   mutation UploadFile($input: UploadFileInput!) {
@@ -17,8 +17,10 @@ const GraphQLUpload = () => {
 
   let { loading, progress, error } = useUpload(files, {
     mutation: uploadMutation,
-    variables: { input: { files, name: 'test' } },
+    variables: { input: { files, name: "test" } },
   });
+
+  console.log(loading, progress, error);
 
   return (
     <div style={{ marginBottom: 50 }}>
@@ -28,7 +30,11 @@ const GraphQLUpload = () => {
       ) : error ? (
         <div>{error}</div>
       ) : (
-        <input type="file" onChange={e => setFiles(e.target.files)} multiple />
+        <input
+          type="file"
+          onChange={(e) => setFiles(e.target.files)}
+          multiple
+        />
       )}
     </div>
   );

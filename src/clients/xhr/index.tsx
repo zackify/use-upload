@@ -1,7 +1,7 @@
-import request from './request';
-import { XHRResponse } from './listeners';
-import { dispatchType, SET_ERROR } from '../../upload-reducer';
-import { FileOrFileList } from '../../';
+import request from "./request";
+import { XHRResponse } from "./listeners";
+import { dispatchType, SET_ERROR } from "../../upload-reducer";
+import { FileOrFileList } from "../../";
 
 export type XHRClientProps = {
   dispatch: dispatchType;
@@ -28,7 +28,7 @@ export type XHROptions = {
   path?: string;
   withCredentials?: boolean;
   getUrl?: (files: FileOrFileList) => GetUrlResponse | Promise<GetUrlResponse>;
-  method?: 'GET' | 'PUT' | 'POST' | 'PATCH' | 'DELETE';
+  method?: "GET" | "PUT" | "POST" | "PATCH" | "DELETE";
 };
 
 type Headers = {
@@ -49,7 +49,7 @@ export const createXhrClient = ({
   options,
 }: XHRClientProps): Promise<XHRResponse> => {
   let modifiedOptions = modifyRequest ? modifyRequest(options) : options;
-  let url = `${baseUrl}${options.path || ''}`;
+  let url = `${baseUrl || ""}${options.path || ""}`;
 
   //Get the url using a promise, for signed uploads
   // this has grown out of control... i need to refactor this library since it was my first time really using TS
@@ -57,7 +57,7 @@ export const createXhrClient = ({
   if (modifiedOptions.getUrl) {
     try {
       let response = await modifiedOptions.getUrl(files);
-      if (typeof response === 'string') url = response;
+      if (typeof response === "string") url = response;
       else {
         url = response.url;
         if (response.headers)
@@ -70,7 +70,7 @@ export const createXhrClient = ({
       // If there was a problem, set an error
       return dispatch({
         type: SET_ERROR,
-        payload: 'Error getting async upload url',
+        payload: "Error getting async upload url",
       });
     }
   }

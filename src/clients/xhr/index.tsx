@@ -14,7 +14,7 @@ export type XHRClient = (args: XHRClientProps) => Promise<XHRResponse>;
 
 export type XHRSetupOptions = {
   baseUrl?: string;
-  modifyRequest?: (request: XHROptions) => XHROptions;
+  modifyRequest?: (request: XHROptions) => Promise<XHROptions> | XHROptions;
 };
 
 export type GetUrlResponse =
@@ -48,7 +48,7 @@ export const createXhrClient = ({
   files,
   options,
 }: XHRClientProps): Promise<XHRResponse> => {
-  let modifiedOptions = modifyRequest ? modifyRequest(options) : options;
+  let modifiedOptions = modifyRequest ? await modifyRequest(options) : options;
   let url = `${baseUrl || ""}${options.path || ""}`;
 
   //Get the url using a promise, for signed uploads

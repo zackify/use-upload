@@ -1,6 +1,6 @@
-import request from './request';
-import { extractFiles } from 'extract-files';
-import { XHRResponse } from '../xhr/listeners';
+import request from "./request";
+import { extractFiles } from "extract-files";
+import { XHRResponse } from "../xhr/listeners";
 /* 
   Extract files is the official package used by the developer who helped
   create the graphql upload spec in apollo client / server
@@ -9,7 +9,9 @@ import { XHRResponse } from '../xhr/listeners';
 
 type GraphQLSetupOptions = {
   baseUrl: string;
-  modifyRequest?: (request: GraphQLOptions) => GraphQLOptions;
+  modifyRequest?: (
+    request: GraphQLOptions
+  ) => Promise<GraphQLOptions> | GraphQLOptions;
 };
 
 export type GraphQLClientProps = {
@@ -39,11 +41,11 @@ type FileMap = {
 export const createGraphQLClient = ({
   baseUrl,
   modifyRequest,
-}: GraphQLSetupOptions) => ({
+}: GraphQLSetupOptions) => async ({
   onProgress,
   options,
 }: GraphQLClientProps): Promise<XHRResponse> => {
-  let modifiedOptions = modifyRequest ? modifyRequest(options) : options;
+  let modifiedOptions = modifyRequest ? await modifyRequest(options) : options;
 
   const { clone, files } = extractFiles({
     query: options.mutation.loc.source.body,
@@ -51,14 +53,14 @@ export const createGraphQLClient = ({
   });
 
   var body = new FormData();
-  body.append('operations', JSON.stringify(clone));
+  body.append("operations", JSON.stringify(clone));
 
   const map: FileMap = {};
   let i = 0;
   files.forEach((paths: string) => {
     map[++i] = paths;
   });
-  body.append('map', JSON.stringify(map));
+  body.append("map", JSON.stringify(map));
 
   i = 0;
   files.forEach((paths: string, file: File) => {
@@ -69,6 +71,6 @@ export const createGraphQLClient = ({
     body,
     onProgress,
     options: modifiedOptions,
-    url: `${baseUrl}${options.path || ''}`,
+    url: `${baseUrl}${options.path || ""}`,
   });
 };

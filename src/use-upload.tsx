@@ -10,7 +10,7 @@ import {
 } from './upload-reducer';
 import { XHRClient, XHROptions, createXhrClient } from './clients/xhr';
 import { FileOrFileList } from './';
-import { GraphQLClient, GraphQLOptions } from 'clients/graphql';
+import { GraphQLClient, GraphQLOptions } from './clients/graphql';
 
 type HookProps = {
   files: File | FileList;

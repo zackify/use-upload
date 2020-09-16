@@ -7,6 +7,8 @@ import {
   SET_UPLOAD_PROGRESS,
   FINISH_UPLOADING,
   dispatchType,
+  initialState,
+  CLEAR_STATE,
 } from './upload-reducer';
 import { XHRClient, XHROptions, createXhrClient } from './clients/xhr';
 import { FileOrFileList } from './';
@@ -43,9 +45,10 @@ const handleUpload = async ({
 export const useUpload = (
   files: FileOrFileList,
   options: XHROptions | GraphQLOptions,
-): UploadState => {
+): [UploadState, () => void] => {
   let client = useContext<XHRClient | GraphQLClient | null>(UploadContext);
-  const [state, dispatch] = useReducer(reducer, {});
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const clearState = () => dispatch({ type: CLEAR_STATE });
 
   useEffect(() => {
     if (!files) return;
@@ -57,5 +60,5 @@ export const useUpload = (
     });
   }, [files]);
 
-  return state;
+  return [state, clearState];
 };

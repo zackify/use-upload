@@ -2,7 +2,7 @@ export const SET_ERROR = 'SET_ERROR';
 export const START_UPLOADING = 'START_UPLOADING';
 export const SET_UPLOAD_PROGRESS = 'SET_UPLOAD_PROGRESS';
 export const FINISH_UPLOADING = 'FINISH_UPLOADING';
-export const CLEAR_STATE = 'CLEAR_STATE';
+export const RESET = 'RESET';
 
 export type UploadState = {
   loading: boolean;
@@ -25,7 +25,7 @@ export type Action =
   | { type: 'SET_UPLOAD_PROGRESS'; payload: number }
   | { type: 'SET_ERROR'; payload: string }
   | { type: 'FINISH_UPLOADING'; payload: any }
-  | { type: 'CLEAR_STATE'; };
+  | { type: 'RESET'; };
 
 export type dispatchType = (action: Action) => void;
 
@@ -46,7 +46,7 @@ export function reducer(state: UploadState, action: Action): UploadState {
         response: action.payload,
         error: action.payload.error ? action.payload.response : false,
       };
-    case CLEAR_STATE:
+    case RESET:
       return {
         ...initialState
       };

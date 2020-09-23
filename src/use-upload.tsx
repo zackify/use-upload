@@ -8,7 +8,7 @@ import {
   FINISH_UPLOADING,
   dispatchType,
   initialState,
-  CLEAR_STATE,
+  RESET,
 } from './upload-reducer';
 import { XHRClient, XHROptions, createXhrClient } from './clients/xhr';
 import { FileOrFileList } from './';
@@ -65,6 +65,6 @@ export const useUpload = (
 
   return {
     ...state,
-    reset: () => dispatch({ type: CLEAR_STATE })
+    reset: () => dispatch({ type: RESET })
   };
 };

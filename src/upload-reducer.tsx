@@ -51,8 +51,6 @@ export function reducer(state: UploadState, action: Action): UploadState {
         ...initialState
       };
     default:
-      return {
-        ...state
-      };
+      return state;
   }
 }

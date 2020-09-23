@@ -52,7 +52,6 @@ export const useUpload = (
 ): UseUploadResult => {
   let client = useContext<XHRClient | GraphQLClient | null>(UploadContext);
   const [state, dispatch] = useReducer(reducer, initialState);
-  const resetState = () => dispatch({ type: CLEAR_STATE });
 
   useEffect(() => {
     if (!files) return;
@@ -66,6 +65,6 @@ export const useUpload = (
 
   return {
     ...state,
-    reset: resetState
+    reset: () => dispatch({ type: CLEAR_STATE })
   };
 };

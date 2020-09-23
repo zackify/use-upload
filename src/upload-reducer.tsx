@@ -33,7 +33,7 @@ export type dispatchType = (action: Action) => void;
 export function reducer(state: UploadState, action: Action): UploadState {
   switch (action.type) {
     case START_UPLOADING:
-      return { ...state, loading: true };
+      return { ...initialState, loading: true };
     case SET_UPLOAD_PROGRESS:
       return { ...state, progress: action.payload };
     case SET_ERROR:

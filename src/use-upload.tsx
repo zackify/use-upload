@@ -42,13 +42,17 @@ const handleUpload = async ({
   if (response) dispatch({ type: FINISH_UPLOADING, payload: response });
 };
 
+type UseUploadResult = UploadState & {
+  reset: () => void
+}
+
 export const useUpload = (
   files: FileOrFileList,
   options: XHROptions | GraphQLOptions,
-): [UploadState, () => void] => {
+): UseUploadResult => {
   let client = useContext<XHRClient | GraphQLClient | null>(UploadContext);
   const [state, dispatch] = useReducer(reducer, initialState);
-  const clearState = () => dispatch({ type: CLEAR_STATE });
+  const resetState = () => dispatch({ type: CLEAR_STATE });
 
   useEffect(() => {
     if (!files) return;
@@ -60,5 +64,8 @@ export const useUpload = (
     });
   }, [files]);
 
-  return [state, clearState];
+  return {
+    ...state,
+    reset: resetState
+  };
 };

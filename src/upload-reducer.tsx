@@ -44,7 +44,11 @@ export function reducer(state: UploadState, action: Action): UploadState {
         done: true,
         loading: false,
         response: action.payload,
-        error: action.payload.error ? action.payload.response : false,
+        error: action.payload.error
+          ? !!action.payload.response.length
+            ? action.payload.response
+            : 'An unknown error has occurred'
+          : false,
       };
     case RESET:
       return {

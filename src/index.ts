@@ -1,14 +1,3 @@
-import { useUpload } from './use-upload';
-import { UploadProvider, UploadContext } from './provider';
-import { createXhrClient } from './clients/xhr';
-import { createGraphQLClient } from './clients/graphql';
+import { useUpload } from "./use-upload";
 
-export {
-  useUpload,
-  UploadContext,
-  UploadProvider,
-  createXhrClient,
-  createGraphQLClient,
-};
-
-export type FileOrFileList = FileList | File;
+export { useUpload };

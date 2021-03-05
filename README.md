@@ -1,4 +1,4 @@
-**Zero dependency, total control, file upload hook for React.**
+**Zero dependency, total control, file upload hook for React with upload progress.**
 
 This has been rewritten into a single file for simplicity, and the function signature has gotten much smaller.
 

@@ -2,6 +2,8 @@
 
 This has been rewritten into a single file for simplicity, and the function signature has gotten much smaller.
 
+Todo: Test coverage
+
 ## V1
 
 Please check the [v1 branch](https://github.com/zackify/react-use-upload/tree/v1) for past documentation

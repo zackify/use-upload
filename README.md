@@ -172,7 +172,7 @@ const MyComponent = () => {
     return {
       method: "PUT",
       url: url,
-      // send a single file in the body to the storage bucker
+      // send a single file in the body to the storage bucket
       body: files[0],
     };
   });

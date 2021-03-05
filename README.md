@@ -68,7 +68,7 @@ const MyComponent = () => {
         type="file"
         onChange={(e) => {
           if (e.target.files) {
-            upload({ file: e.target.files[0] });
+            upload({ files: e.target.files });
           }
         }}
       />
@@ -102,7 +102,7 @@ const MyComponent = () => {
         type="file"
         onChange={(e) => {
           if (e.target.files) {
-            upload({ file: e.target.files[0] });
+            upload({ files: e.target.files });
           }
         }}
       />
@@ -138,7 +138,7 @@ const MyComponent = () => {
         type="file"
         onChange={(e) => {
           if (e.target.files) {
-            upload({ file: e.target.files[0] });
+            upload({ files: e.target.files });
           }
         }}
       />
@@ -190,7 +190,7 @@ const MyComponent = () => {
         type="file"
         onChange={(e) => {
           if (e.target.files) {
-            upload({ file: e.target.files[0] });
+            upload({ files: e.target.files });
           }
         }}
       />

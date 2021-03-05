@@ -4,10 +4,6 @@ This has been rewritten into a single file for simplicity, and the function sign
 
 Todo: Test coverage
 
-## V1
-
-Please check the [v1 branch](https://github.com/zackify/react-use-upload/tree/v1) for past documentation
-
 ### What is it?
 
 This is a simple hook for handling file uploads in React. It takes the simplest approach possible so that you have full control over the upload process, while still providing lots of help vs implementing this yourself.
@@ -17,7 +13,7 @@ It has upload progress due to using XHR, and can be used for uploading file dire
 ### Install
 
 ```js
-npm install react-use-upload@1.0.0-beta1
+npm install react-use-upload@1.0.0-beta2
 ```
 
 ### Usage

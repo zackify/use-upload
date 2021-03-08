@@ -24,7 +24,7 @@ Here's a basic example of uploading a single file to a url
 const MyComponent = () => {
   let [upload, { progress, done, loading }] = useUpload(({ files }) => ({
     method: "PUT",
-    url: url,
+    url: "http://localhost:4000",
     body: files[0],
   }));
 
@@ -56,7 +56,7 @@ const MyComponent = () => {
 
     return {
       method: "PUT",
-      url: url,
+      url: "http://localhost:4000",
       body: formData,
     };
   });
@@ -89,7 +89,7 @@ const MyComponent = () => {
 
     return {
       method: "PUT",
-      url: url,
+      url: "http://localhost:4000",
       body: formData,
       headers: { Authorization: "test" },
     };
@@ -125,7 +125,7 @@ const MyComponent = () => {
 
     return {
       method: "PUT",
-      url: url,
+      url: "http://localhost:4000",
       body: formData,
       headers: { Authorization: "test" },
     };

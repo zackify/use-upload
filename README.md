@@ -2,7 +2,7 @@
 
 This has been rewritten into a single file for simplicity, and the function signature has gotten much smaller.
 
-Todo: Test coverage
+100% Test Coverage :)
 
 ### What is it?
 
@@ -13,7 +13,7 @@ It has upload progress due to using XHR, and can be used for uploading file dire
 ### Install
 
 ```js
-npm install react-use-upload@1.0.0-beta2
+npm install react-use-upload
 ```
 
 ### Usage

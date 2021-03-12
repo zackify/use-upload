@@ -1,4 +1,4 @@
-**Zero dependency, total control, file upload hook for React.**
+**Zero dependency, total control, file upload hook for React with upload progress.**
 
 This has been rewritten into a single file for simplicity, and the function signature has gotten much smaller.
 
@@ -24,7 +24,7 @@ Here's a basic example of uploading a single file to a url
 const MyComponent = () => {
   let [upload, { progress, done, loading }] = useUpload(({ files }) => ({
     method: "PUT",
-    url: url,
+    url: "http://localhost:4000",
     body: files[0],
   }));
 
@@ -56,7 +56,7 @@ const MyComponent = () => {
 
     return {
       method: "PUT",
-      url: url,
+      url: "http://localhost:4000",
       body: formData,
     };
   });
@@ -68,7 +68,7 @@ const MyComponent = () => {
         type="file"
         onChange={(e) => {
           if (e.target.files) {
-            upload({ file: e.target.files[0] });
+            upload({ files: e.target.files });
           }
         }}
       />
@@ -89,7 +89,7 @@ const MyComponent = () => {
 
     return {
       method: "PUT",
-      url: url,
+      url: "http://localhost:4000",
       body: formData,
       headers: { Authorization: "test" },
     };
@@ -102,7 +102,7 @@ const MyComponent = () => {
         type="file"
         onChange={(e) => {
           if (e.target.files) {
-            upload({ file: e.target.files[0] });
+            upload({ files: e.target.files });
           }
         }}
       />
@@ -125,7 +125,7 @@ const MyComponent = () => {
 
     return {
       method: "PUT",
-      url: url,
+      url: "http://localhost:4000",
       body: formData,
       headers: { Authorization: "test" },
     };
@@ -138,7 +138,7 @@ const MyComponent = () => {
         type="file"
         onChange={(e) => {
           if (e.target.files) {
-            upload({ file: e.target.files[0] });
+            upload({ files: e.target.files });
           }
         }}
       />
@@ -172,7 +172,7 @@ const MyComponent = () => {
     return {
       method: "PUT",
       url: url,
-      // send a single file in the body to the storage bucker
+      // send a single file in the body to the storage bucket
       body: files[0],
     };
   });
@@ -190,7 +190,7 @@ const MyComponent = () => {
         type="file"
         onChange={(e) => {
           if (e.target.files) {
-            upload({ file: e.target.files[0] });
+            upload({ files: e.target.files });
           }
         }}
       />

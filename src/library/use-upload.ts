@@ -1,52 +1,24 @@
-import { useState } from "react";
+import {
+  BeforeRequest,
+  UploadProps,
+  UploadFunction,
+  UseUploadState,
+  Headers,
+} from "./types";
 
-type Headers = {
-  [key: string]: any;
+type UseUploadCreatorProps<Response> = {
+  beforeRequest: BeforeRequest;
+  setState: (data: UseUploadState<Response>) => any;
+  updateState: (
+    cb: (data: UseUploadState<Response>) => UseUploadState<Response>
+  ) => any;
 };
 
-type RequestOptions = {
-  method: string;
-  url: string;
-  headers?: Headers;
-  body: Document | BodyInit | null | undefined;
-};
-
-type BeforeRequestProps = {
-  xhr: XMLHttpRequest;
-  files: FileList;
-};
-type BeforeRequest = (
-  props: BeforeRequestProps
-) => Promise<RequestOptions | undefined> | RequestOptions | undefined;
-
-type UploadProps = {
-  files: FileList;
-};
-
-type UseUploadState<Response> = {
-  loading: boolean;
-  done: boolean;
-
-  data?: Response;
-  error?: ProgressEvent;
-  xhr?: XMLHttpRequest;
-  responseHeaders?: Headers;
-  progress?: number;
-};
-
-type UseUploadResults<Response> = [
-  (props: UploadProps) => void,
-  UseUploadState<Response>
-];
-
-export const useUpload = <Response = any>(
-  beforeRequest: BeforeRequest
-): UseUploadResults<Response> => {
-  let [state, setState] = useState<UseUploadState<Response>>({
-    loading: false,
-    done: false,
-  });
-
+export const useUploadCreator = <Response = any>({
+  beforeRequest,
+  setState,
+  updateState,
+}: UseUploadCreatorProps<Response>): UploadFunction => {
   const upload = async ({ files }: UploadProps) => {
     setState({ loading: true, done: false });
 
@@ -71,7 +43,7 @@ export const useUpload = <Response = any>(
       XHR Listeners
     */
     xhr.upload.addEventListener("progress", (event) => {
-      setState((state) => ({
+      updateState((state) => ({
         ...state,
         progress: Math.round((event.loaded / event.total) * 100),
       }));
@@ -112,5 +84,5 @@ export const useUpload = <Response = any>(
     xhr.send(options.body);
   };
 
-  return [upload, state];
+  return upload;
 };

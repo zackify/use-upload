@@ -1,26 +1,61 @@
-**Zero dependency, total control, file upload hook for React with upload progress.**
+**Zero dependency, total control, file upload hook for React and Svelte with upload progress.**
 
-This has been rewritten into a single file for simplicity, and the function signature has gotten much smaller.
+100% Test Coverage across React + Svelte
 
-100% Test Coverage :)
+This is a simple hook for handling file uploads across multiple frameworks. It takes the simplest approach possible so that you have full control over the upload process, while still providing lots of help vs implementing this yourself.
 
-### What is it?
-
-This is a simple hook for handling file uploads in React. It takes the simplest approach possible so that you have full control over the upload process, while still providing lots of help vs implementing this yourself.
-
-It has upload progress due to using XHR, and can be used for uploading file direct to Google Cloud, AWS, etc.
+It has upload progress due to using XHR, and can be used for uploading files direct to Google Cloud, AWS, etc.
 
 ### Install
 
 ```js
-npm install react-use-upload
+npm install @zach.codes/use-upload
 ```
 
-### Usage
+## Framework Agnostic
 
-Here's a basic example of uploading a single file to a url
+This library supports the same api across frameworks. Currently only svelte and React have implementations.
+
+## Svelte
 
 ```js
+<script lang="ts">
+  import { useUpload } from "@zach.codes/use-upload/svelte";
+
+  let [upload, state] = useUpload(({ files }) => ({
+    method: "PUT",
+    url: "http://localhost:5000",
+    body: files[0],
+  }));
+</script>
+
+<div>
+  {#if $state.done}
+    <div>Done uploading!</div>
+  {/if}
+  {#if $state.error}
+    <div>Error uploading: {$state.error}</div>
+  {/if}
+  {#if $state.loading}
+    <div>{$state.progress}% complete</div>
+  {/if}
+  <input
+    type="file"
+    on:change={(e) => {
+      if (e.currentTarget.files) upload({ files: e.currentTarget.files });
+    }}
+  />
+</div>
+
+```
+
+### React
+
+Here's a basic example of uploading a single file to a url in React. The below examples all work in Svelte as well.
+
+```js
+import {useUpload} from '@zach.codes/use-upload/react'
+
 const MyComponent = () => {
   let [upload, { progress, done, loading }] = useUpload(({ files }) => ({
     method: "PUT",
@@ -49,6 +84,8 @@ const MyComponent = () => {
 It's up to you to pass in formdata
 
 ```js
+import {useUpload} from '@zach.codes/use-upload/react'
+
 const MyComponent = () => {
   let [upload, { progress, done, loading }] = useUpload(({ files }) => {
     let formData = new FormData();
@@ -82,6 +119,8 @@ const MyComponent = () => {
 You can pass a custom headers object
 
 ```js
+import {useUpload} from '@zach.codes/use-upload/react'
+
 const MyComponent = () => {
   let [upload, { progress, done, loading }] = useUpload(({ files }) => {
     let formData = new FormData();
@@ -116,6 +155,8 @@ const MyComponent = () => {
 You have full access to the XHR object, so you can set withCredentials or anything else you'd like.
 
 ```js
+import {useUpload} from '@zach.codes/use-upload/react'
+
 const MyComponent = () => {
   let [upload, { progress, done, loading }] = useUpload(({ files, xhr }) => {
     xhr.withCredentials = true;
@@ -158,6 +199,8 @@ Signed uploads to a storage bucket on AWS or similar service, usually require th
 Here's how simple it is with this hook
 
 ```js
+import {useUpload} from '@zach.codes/use-upload/react'
+
 const MyComponent = () => {
   let [upload, { progress, done, loading }] = useUpload(async ({ files }) => {
     // This function is your request logic for getting a url

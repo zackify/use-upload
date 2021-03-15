@@ -14,10 +14,9 @@ test("It uploads a file correctly", async () => {
   const file = new File(["hello"], "hello.png", { type: "image/png" });
   userEvent.upload(screen.getByLabelText("upload"), file);
 
+  await act(() => new Promise((resolve) => setTimeout(resolve, 0)));
   //loading is now shown
   screen.getByText("loading");
-
-  await act(() => new Promise((resolve) => setTimeout(resolve, 0)));
 
   expect(global.xhrOpen.mock.calls[0][0]).toEqual("POST");
   expect(global.xhrOpen.mock.calls[0][1]).toEqual("github.gov");

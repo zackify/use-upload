@@ -1,6 +1,5 @@
 import React from "react";
-import { useEffect } from "react";
-import { useUpload } from "../src";
+import { useUpload } from "../../src/react";
 
 type Props = {
   method: string;

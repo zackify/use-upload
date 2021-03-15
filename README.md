@@ -18,7 +18,7 @@ This library supports the same api across frameworks. Currently only svelte and 
 
 ## Svelte
 
-```js
+```svelte
 <script lang="ts">
   import { useUpload } from "@zach.codes/use-upload/svelte";
 
@@ -53,7 +53,7 @@ This library supports the same api across frameworks. Currently only svelte and 
 
 Here's a basic example of uploading a single file to a url in React. The below examples all work in Svelte as well.
 
-```js
+```tsx
 import {useUpload} from '@zach.codes/use-upload/react'
 
 const MyComponent = () => {
@@ -83,7 +83,7 @@ const MyComponent = () => {
 
 It's up to you to pass in formdata
 
-```js
+```tsx
 import {useUpload} from '@zach.codes/use-upload/react'
 
 const MyComponent = () => {
@@ -118,7 +118,7 @@ const MyComponent = () => {
 
 You can pass a custom headers object
 
-```js
+```tsx
 import {useUpload} from '@zach.codes/use-upload/react'
 
 const MyComponent = () => {
@@ -154,7 +154,7 @@ const MyComponent = () => {
 
 You have full access to the XHR object, so you can set withCredentials or anything else you'd like.
 
-```js
+```tsx
 import {useUpload} from '@zach.codes/use-upload/react'
 
 const MyComponent = () => {
@@ -198,7 +198,7 @@ Signed uploads to a storage bucket on AWS or similar service, usually require th
 
 Here's how simple it is with this hook
 
-```js
+```tsx
 import {useUpload} from '@zach.codes/use-upload/react'
 
 const MyComponent = () => {

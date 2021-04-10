@@ -16,5 +16,5 @@
     "declaration": true,
     "outDir": "lib"
   },
-  "include": ["src", "tests"]
+  "include": ["src"]
 }

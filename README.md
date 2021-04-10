@@ -20,7 +20,7 @@ This library supports the same api across frameworks. Currently only svelte and 
 
 ```js
 <script lang="ts">
-  import { useUpload } from "@zach.codes/use-upload/svelte";
+  import { useUpload } from "@zach.codes/use-upload/lib/svelte";
 
   let [upload, state] = useUpload(({ files }) => ({
     method: "PUT",
@@ -54,7 +54,7 @@ This library supports the same api across frameworks. Currently only svelte and 
 Here's a basic example of uploading a single file to a url in React. The below examples all work in Svelte as well.
 
 ```js
-import {useUpload} from '@zach.codes/use-upload/react'
+import { useUpload } from "@zach.codes/use-upload/lib/react";
 
 const MyComponent = () => {
   let [upload, { progress, done, loading }] = useUpload(({ files }) => ({
@@ -84,7 +84,7 @@ const MyComponent = () => {
 It's up to you to pass in formdata
 
 ```js
-import {useUpload} from '@zach.codes/use-upload/react'
+import { useUpload } from "@zach.codes/use-upload/lib/react";
 
 const MyComponent = () => {
   let [upload, { progress, done, loading }] = useUpload(({ files }) => {
@@ -119,7 +119,7 @@ const MyComponent = () => {
 You can pass a custom headers object
 
 ```js
-import {useUpload} from '@zach.codes/use-upload/react'
+import { useUpload } from "@zach.codes/use-upload/lib/react";
 
 const MyComponent = () => {
   let [upload, { progress, done, loading }] = useUpload(({ files }) => {
@@ -155,7 +155,7 @@ const MyComponent = () => {
 You have full access to the XHR object, so you can set withCredentials or anything else you'd like.
 
 ```js
-import {useUpload} from '@zach.codes/use-upload/react'
+import { useUpload } from "@zach.codes/use-upload/lib/react";
 
 const MyComponent = () => {
   let [upload, { progress, done, loading }] = useUpload(({ files, xhr }) => {
@@ -199,7 +199,7 @@ Signed uploads to a storage bucket on AWS or similar service, usually require th
 Here's how simple it is with this hook
 
 ```js
-import {useUpload} from '@zach.codes/use-upload/react'
+import { useUpload } from "@zach.codes/use-upload/lib/react";
 
 const MyComponent = () => {
   let [upload, { progress, done, loading }] = useUpload(async ({ files }) => {
